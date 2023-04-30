@@ -1,38 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lendsqr Frontend Engineering Test
 
-## Getting Started
+Welcome to my submission for the Lendsqr Frontend Engineering Test! This project is a React web application built using TypeScript and SCSS, that consists of four pages - Login, Dashboard, User page, and User details page.
 
-First, run the development server:
+## Table of Contents
+
+- Getting Started
+- Tech Stack
+- Mock API
+- Submission
+
+### Getting Started
+
+To get started with the project, you can clone the repository using the following command:
 
 ```bash
+git clone https://github.com/cursedafk/lendsqr-fe-test.git
+```
+
+After cloning the repository, navigate to the project directory and run the following commands to install the dependencies and start the development server
+
+```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Tech Stack
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The project is built using the following technologies:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Next Js
+- TypeScript
+- SCSS
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Mock API
 
-## Learn More
+The application uses a mock API to retrieve user data. The API has two endpoints - [https://www.google.com/url?q=https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users&sa=D&source=editors&ust=1682861166411473&usg=AOvVaw0Z9h37pOQ1-OMG1EDtQ6mj](/lendsqr/api/v1/users) and [https://www.google.com/url?q=https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/:id&sa=D&source=editors&ust=1682861166412079&usg=AOvVaw14Rzh0Rql5puJHhVfdsoT3](/lendsqr/api/v1/users/:id). The former retrieves all users, while the latter retrieves a single user by their ID.
 
-To learn more about Next.js, take a look at the following resources:
+### Submission
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Pending...
