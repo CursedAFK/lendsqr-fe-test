@@ -34,6 +34,7 @@ const Header = () => {
 	}
 
 	useEffect(() => {
+		if (!sessionStorage.getItem('lendsqr-email')) return
 		setUsername(
 			sessionStorage.getItem('lendsqr-email')!.match(/^[a-zA-Z]+/)![0] as string
 		)

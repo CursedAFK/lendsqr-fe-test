@@ -1,20 +1,78 @@
 import type { AppProps } from 'next/app'
-import { Roboto, Work_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import '@/styles/globals.scss'
 import { StoreProvider } from '@/context/store'
+import { NextPage } from 'next'
+import { ReactElement, ReactNode } from 'react'
 
-const roboto = Roboto({
-	subsets: ['latin'],
-	display: 'swap',
-	weight: ['400', '500'],
-	variable: '--font-roboto'
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+	getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+	Component: NextPageWithLayout
+}
+
+const roboto = localFont({
+	variable: '--font-roboto',
+	src: [
+		{
+			path: '../public/fonts/roboto/Roboto-Thin.ttf',
+			weight: '200',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/roboto/Roboto-Light.ttf',
+			weight: '300',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/roboto/Roboto-Regular.ttf',
+			weight: '400',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/roboto/Roboto-Bold.ttf',
+			weight: '700',
+			style: 'normal'
+		}
+	]
 })
 
-const workSans = Work_Sans({
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-work-sans'
+const workSans = localFont({
+	variable: '--font-work-sans',
+	src: [
+		{
+			path: '../public/fonts/work-sans/WorkSans-Thin.ttf',
+			weight: '200',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/work-sans/WorkSans-Light.ttf',
+			weight: '300',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/work-sans/WorkSans-Regular.ttf',
+			weight: '400',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/work-sans/WorkSans-Medium.ttf',
+			weight: '500',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/work-sans/WorkSans-SemiBold.ttf',
+			weight: '600',
+			style: 'normal'
+		},
+		{
+			path: '../public/fonts/work-sans/WorkSans-Bold.ttf',
+			weight: '700',
+			style: 'normal'
+		}
+	]
 })
 
 const avNext = localFont({
@@ -38,8 +96,10 @@ const avNext = localFont({
 	]
 })
 
-export default function App({ Component, pageProps }: AppProps) {
-	return (
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+	const getLayout = Component.getLayout ?? (page => page)
+
+	return getLayout(
 		<StoreProvider>
 			<div
 				className={`${avNext.variable} ${roboto.variable} ${workSans.variable}`}

@@ -1,19 +1,21 @@
 import PageHead from '@/components/PageHead/PageHead'
-import ProtectedPage from '@/components/ProtectedPage/ProtectedPage'
-import { NextPage } from 'next'
-import Header from '@/components/Dashboard/Header/Header'
 import styles from '../styles/dashboard.module.scss'
+import { NextPageWithLayout } from './_app'
+import { ReactElement } from 'react'
+import Layout from '@/components/Dashboard/Layout/Layout'
 
-const Dashboard: NextPage = () => {
+const Dashboard: NextPageWithLayout = () => {
 	return (
-		<ProtectedPage>
-			<div className={styles.container}>
-				<PageHead pageTitle='Dashboard | Lendsqr' />
+		<main className={styles.container}>
+			<PageHead pageTitle='Dashboard | Lendsqr' />
 
-				<Header />
-			</div>
-		</ProtectedPage>
+			<p>Dashboard</p>
+		</main>
 	)
+}
+
+Dashboard.getLayout = function getLayout(page: ReactElement) {
+	return <Layout>{page}</Layout>
 }
 
 export default Dashboard
