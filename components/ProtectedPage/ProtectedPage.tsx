@@ -1,31 +1,21 @@
-import { useAuthState } from '@/context/store'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
 	children: React.ReactNode
 }
 
 const ProtectedPage = ({ children }: Props) => {
-	const { isAuthenticated, addUser } = useAuthState(state => ({
-		isAuthenticated: state.isAuthenticated,
-		addUser: state.addUser
-	}))
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 
 	const router = useRouter()
 
 	useEffect(() => {
-		console.log(isAuthenticated)
 		if (isAuthenticated) return
+		const lendsqrEmail = sessionStorage.getItem('lendsqr-email')
+		if (lendsqrEmail) return setIsAuthenticated(true)
 		router.push('/login')
-	}, [isAuthenticated, router])
-
-	useEffect(() => {
-		const username = JSON.parse(localStorage.getItem('auth-storage')!)
-			.username as string
-		if (!username) return
-		addUser(username)
-	}, [addUser])
+	}, [router, isAuthenticated])
 
 	return <>{isAuthenticated ? children : null}</>
 }

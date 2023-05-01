@@ -1,0 +1,25 @@
+.container {
+	.logo {
+		display: flex;
+		align-items: flex-start;
+
+		img {
+			height: 1.6vw;
+			width: auto;
+
+			@media screen and (max-width: 1000px) {
+				height: 4.5vw;
+			}
+		}
+
+		svg {
+			height: 2.1vw;
+			width: 9vw;
+
+			@media screen and (max-width: 1000px) {
+				height: 5vw;
+				width: 21vw;
+			}
+		}
+	}
+}

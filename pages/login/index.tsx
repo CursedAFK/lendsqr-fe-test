@@ -3,7 +3,6 @@ import PageHead from '@/components/PageHead/PageHead'
 import Image from 'next/image'
 import styles from '../../styles/login.module.scss'
 import { useState } from 'react'
-import { useAuthState } from '@/context/store'
 import { useRouter } from 'next/router'
 
 const Login = () => {
@@ -13,10 +12,6 @@ const Login = () => {
 	})
 	const [showPassword, setShowPassword] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
-
-	const { addUser } = useAuthState(state => ({
-		addUser: state.addUser
-	}))
 
 	const router = useRouter()
 
@@ -29,7 +24,7 @@ const Login = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setIsLoading(true)
-		addUser(formData.email)
+		sessionStorage.setItem('lendsqr-email', formData.email)
 		setFormData({
 			email: '',
 			password: ''

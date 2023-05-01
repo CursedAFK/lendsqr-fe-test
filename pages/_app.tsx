@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { Roboto, Work_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import '@/styles/globals.scss'
+import { StoreProvider } from '@/context/store'
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -39,10 +40,12 @@ const avNext = localFont({
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<div
-			className={`${avNext.variable} ${roboto.variable} ${workSans.variable}`}
-		>
-			<Component {...pageProps} />
-		</div>
+		<StoreProvider>
+			<div
+				className={`${avNext.variable} ${roboto.variable} ${workSans.variable}`}
+			>
+				<Component {...pageProps} />
+			</div>
+		</StoreProvider>
 	)
 }
