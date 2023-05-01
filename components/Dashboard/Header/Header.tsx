@@ -13,12 +13,24 @@ import { useRouter } from 'next/router'
 const Header = () => {
 	const [username, setUsername] = useState('')
 	const [isOpen, setIsOpen] = useState(false)
+	const [searchTerm, setSearchTerm] = useState('')
 
 	const router = useRouter()
 
 	const handleSignout = () => {
 		sessionStorage.removeItem('lendsqr-email')
 		router.push('/login')
+	}
+
+	const handleKeyDown = (e: any) => {
+		const keyEvent = e as KeyboardEvent
+		if (keyEvent.key !== 'Enter') return
+		e.preventDefault()
+		handleSearch()
+	}
+
+	const handleSearch = () => {
+		if (!searchTerm) return
 	}
 
 	useEffect(() => {
@@ -29,7 +41,10 @@ const Header = () => {
 
 	return (
 		<header className={styles.container}>
-			<div className={styles.logo}>
+			<Link
+				href='/'
+				className={styles.logo}
+			>
 				<Image
 					src='/logo.png'
 					alt='Lendsqr logo'
@@ -37,24 +52,31 @@ const Header = () => {
 					height={26}
 				/>
 				<LendsqrText />
-			</div>
+			</Link>
 
 			<div className={styles.search}>
-				<input
-					type='search'
-					name='search'
-				/>
-				<AiOutlineSearch />
+				<form onSubmit={handleSearch}>
+					<input
+						type='search'
+						name='search'
+						placeholder='Search for anything'
+						value={searchTerm}
+						onChange={e => setSearchTerm(e.target.value)}
+						onKeyDown={handleKeyDown}
+					/>
+					<button type='submit'>
+						<AiOutlineSearch />
+					</button>
+				</form>
 			</div>
 
-			<nav>
+			<nav onMouseLeave={() => setIsOpen(false)}>
 				<Link href='#'>Docs</Link>
-				<BsBell />
-				<CgProfile />
+				<BsBell className={styles.bell} />
+				<CgProfile className={styles.profile} />
 				<div
 					className={styles.account}
 					onMouseOver={() => setIsOpen(true)}
-					onMouseOut={() => setIsOpen(false)}
 				>
 					<p>{username}</p>
 					{isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
