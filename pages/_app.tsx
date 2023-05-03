@@ -1,7 +1,6 @@
 import type { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 import '@/styles/globals.scss'
-import { StoreProvider } from '@/context/store'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 
@@ -100,12 +99,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout = Component.getLayout ?? (page => page)
 
 	return getLayout(
-		<StoreProvider>
-			<div
-				className={`${avNext.variable} ${roboto.variable} ${workSans.variable}`}
-			>
-				<Component {...pageProps} />
-			</div>
-		</StoreProvider>
+		<div
+			className={`${avNext.variable} ${roboto.variable} ${workSans.variable}`}
+		>
+			<Component {...pageProps} />
+		</div>
 	)
 }
