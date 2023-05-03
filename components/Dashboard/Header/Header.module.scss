@@ -77,12 +77,13 @@
 
 .container {
 	position: relative;
-	padding: 1.5vw 5vw 1.5vw 3vw;
+	padding: 1.5vw 3vw 1.5vw 2vw;
 	display: flex;
 	align-items: center;
 	background-color: white;
 	box-shadow: 0 0 0.6vw rgba($color: #000000, $alpha: 0.1);
 	font-family: 'WorkSans', sans-serif;
+	z-index: 4;
 
 	.logo {
 		display: flex;

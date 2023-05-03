@@ -1,0 +1,49 @@
+.container {
+	margin-bottom: 2vw;
+
+	h4 {
+		padding-left: 1.75vw;
+		text-transform: uppercase;
+		opacity: 0.9;
+		font-size: 0.85vw;
+	}
+
+	ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		margin-top: 0.5vw;
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 0.75vw;
+			padding: 0.75vw 0;
+			padding-left: 1.75vw;
+			cursor: pointer;
+			opacity: 0.7;
+			transition: opacity 0.3s, background-color 0.3s;
+
+			&:hover {
+				background-color: rgba(57, 205, 204, 0.1);
+				opacity: 1;
+			}
+
+			&.active {
+				opacity: 1;
+				background-color: rgba(57, 205, 204, 0.1);
+				position: relative;
+
+				&::before {
+					position: absolute;
+					content: '';
+					top: 0;
+					bottom: 0;
+					background-color: rgba(57, 205, 204, 1);
+					width: 2%;
+					left: 0;
+				}
+			}
+		}
+	}
+}
