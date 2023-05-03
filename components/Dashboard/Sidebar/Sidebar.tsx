@@ -23,6 +23,7 @@ import { GrTransaction } from 'react-icons/gr'
 import { BsGearFill } from 'react-icons/bs'
 import { IoIosArrowDown } from 'react-icons/io'
 import Links from './Links/Links'
+import { useStore } from '@/context/store'
 
 const customersLinks = [
 	{
@@ -134,8 +135,14 @@ const settingsLinks = [
 ]
 
 const Sidebar = () => {
+	const { mobileToggle } = useStore(store => ({
+		mobileToggle: store.mobileToggle
+	}))
+
 	return (
-		<aside className={styles.container}>
+		<aside
+			className={`${styles.container} ${mobileToggle ? styles.mobileOpen : ''}`}
+		>
 			<section>
 				<h3>
 					<FaBriefcase /> Switch Organization <IoIosArrowDown />

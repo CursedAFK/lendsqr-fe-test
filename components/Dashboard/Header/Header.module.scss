@@ -85,6 +85,7 @@
 
 	@media screen and (max-width: 1000px) {
 		padding: 6vw 4vw 4vw 4vw;
+		z-index: unset;
 	}
 
 	.desktopNav {
@@ -102,6 +103,7 @@
 				outline: none;
 				background-color: transparent;
 				margin-right: 6vw;
+				z-index: 6;
 
 				svg {
 					color: #213f7d;
@@ -118,6 +120,7 @@
 			@media screen and (max-width: 1000px) {
 				flex: 1;
 				margin-bottom: -1vw;
+				z-index: 6;
 			}
 
 			img {

@@ -49,8 +49,29 @@
 	z-index: 3;
 	width: 18%;
 
+	@media screen and (max-width: 1000px) {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		display: none;
+
+		&.mobileOpen {
+			display: block;
+			overflow-y: scroll;
+			width: 60%;
+			z-index: 5;
+			padding-top: 20vw;
+			background-color: rgba($color: #fff, $alpha: 0.1);
+			backdrop-filter: blur(0.5rem);
+		}
+	}
+
 	section:first-child {
 		margin: 1.5vw 0;
+
+		@media screen and (max-width: 1000px) {
+			margin-bottom: 5vw;
+		}
 
 		> * {
 			display: flex;
@@ -61,6 +82,12 @@
 			cursor: pointer;
 			opacity: 0.7;
 			transition: opacity 0.3s, background-color 0.3s;
+
+			@media screen and (max-width: 1000px) {
+				gap: 2.5vw;
+				padding: 2.5vw 0;
+				padding-left: 3.5vw;
+			}
 
 			&:hover {
 				background-color: rgba(57, 205, 204, 0.1);

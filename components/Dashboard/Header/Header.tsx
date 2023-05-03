@@ -4,7 +4,7 @@ import LendsqrText from '@/components/Icons/LendsqrText'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BsBell } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import { IoMdArrowDropdown, IoMdArrowDropup, IoMdClose } from 'react-icons/io'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { VscSignOut } from 'react-icons/vsc'
 import { SlDocs } from 'react-icons/sl'
@@ -18,8 +18,10 @@ const Header = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
 
-	const { openMobileMenu } = useStore(store => ({
-		openMobileMenu: store.openMobileMenu
+	const { mobileToggle, openMobileMenu, closeMobileMenu } = useStore(store => ({
+		mobileToggle: store.mobileToggle,
+		openMobileMenu: store.openMobileMenu,
+		closeMobileMenu: store.closeMobileMenu
 	}))
 
 	const router = useRouter()
@@ -51,11 +53,12 @@ const Header = () => {
 	return (
 		<header className={styles.container}>
 			<section className={styles.desktopNav}>
-				<button
-					className={styles.mobileToggle}
-					onClick={openMobileMenu}
-				>
-					<RxHamburgerMenu />
+				<button className={styles.mobileToggle}>
+					{mobileToggle ? (
+						<IoMdClose onClick={closeMobileMenu} />
+					) : (
+						<RxHamburgerMenu onClick={openMobileMenu} />
+					)}
 				</button>
 
 				<Link
