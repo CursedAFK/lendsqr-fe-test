@@ -1,4 +1,17 @@
 .container {
 	font-family: var(--font-work-sans);
 	background-color: #fbfbfb;
+	padding: 3vw;
+	color: #213f7d;
+
+	> h2 {
+		font-size: 1.4vw;
+		font-weight: 500;
+	}
+
+	.usersCountSection {
+		display: flex;
+		gap: 2vw;
+		margin-top: 2vw;
+	}
 }
