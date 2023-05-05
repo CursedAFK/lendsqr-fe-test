@@ -14,13 +14,21 @@ import {
 import { BsDatabase } from 'react-icons/bs'
 import UsersTable from '@/components/Dashboard/UsersTable/UsersTable'
 import Pagination from '@/components/Dashboard/Pagination/Pagination'
+import { useStore } from '@/context/store'
 
 interface Props {
 	users: Users[]
 }
 
 const Dashboard: NextPageWithLayout<Props> = ({ users }) => {
-	const [rawUsersData, setRawUsersData] = useState(users)
+	const { storeUsersData, addUsersData } = useStore(state => ({
+		storeUsersData: state.users,
+		addUsersData: state.addUsers
+	}))
+
+	const [rawUsersData, setRawUsersData] = useState(
+		storeUsersData.length ? storeUsersData : users
+	)
 	const [paginate, setPaginate] = useState({
 		start: 0,
 		end: 10
@@ -48,6 +56,7 @@ const Dashboard: NextPageWithLayout<Props> = ({ users }) => {
 				: user
 		)
 		setRawUsersData(pendingUsers)
+		addUsersData(pendingUsers)
 
 		await new Promise(resolve => setTimeout(resolve, 2000))
 
@@ -60,11 +69,19 @@ const Dashboard: NextPageWithLayout<Props> = ({ users }) => {
 				: user
 		)
 		setRawUsersData(updatedUsers)
+		addUsersData(updatedUsers)
 	}
 
 	useEffect(() => {
 		setPaginatedUserData(rawUsersData.slice(paginate.start, paginate.end))
 	}, [paginate, rawUsersData])
+
+	useEffect(() => {
+		if (!users) return
+		if (users.length) {
+			addUsersData(users)
+		}
+	}, [users, addUsersData])
 
 	if (!users) return <p>Loading ...</p>
 

@@ -1,0 +1,24 @@
+.container {
+	font-family: var(--font-work-sans);
+	background-color: #fbfbfb;
+	padding: 3vw;
+	color: #213f7d;
+
+	@media screen and (max-width: 100px) {
+		padding: 12vw;
+	}
+
+	.userPrimaryDetails {
+		header {
+			figure {
+				position: relative;
+				width: 10vw;
+				height: 10vw;
+
+				img {
+					object-fit: cover;
+				}
+			}
+		}
+	}
+}

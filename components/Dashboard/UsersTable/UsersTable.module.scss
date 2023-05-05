@@ -75,6 +75,10 @@
 		&:last-child {
 			transition: color 0.3s;
 
+			@media screen and (max-width: 1000px) {
+				padding-right: 4vw;
+			}
+
 			&:hover {
 				color: #39cdcc;
 			}
@@ -155,13 +159,30 @@
 					color: #213f7d;
 					transition: color 0.3s;
 
+					a {
+						text-decoration: none;
+						display: flex;
+						align-items: center;
+						gap: 0.6vw;
+						font-weight: 500;
+						font-size: 0.9vw;
+						cursor: pointer;
+						color: #213f7d;
+						transition: color 0.3s;
+
+						@media screen and (max-width: 1000px) {
+							font-size: 3.6vw;
+							gap: 2.4vw;
+						}
+
+						&:hover {
+							color: #39cdcc;
+						}
+					}
+
 					@media screen and (max-width: 1000px) {
 						font-size: 3.6vw;
 						gap: 2.4vw;
-					}
-
-					&:nth-child(1):hover {
-						color: #39cdcc;
 					}
 
 					&:nth-child(2):hover {

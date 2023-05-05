@@ -4,6 +4,7 @@ import { HiOutlineDotsVertical, HiOutlineEye } from 'react-icons/hi'
 import { FiUserX, FiUserCheck } from 'react-icons/fi'
 import { Dispatch, SetStateAction, useState } from 'react'
 import styles from './UsersTable.module.scss'
+import Link from 'next/link'
 
 interface Props {
 	users: Users[]
@@ -36,7 +37,9 @@ const OptionTable = ({
 			{isOptionsOpen && (
 				<div onClick={() => setIsOptionsOpen(false)}>
 					<button>
-						<HiOutlineEye /> View Details
+						<Link href={`/user/${userId}`}>
+							<HiOutlineEye /> View Details
+						</Link>
 					</button>
 					<button onClick={() => changeUserStatus(userId, 'Blacklisted')}>
 						<FiUserX /> Blacklist User
