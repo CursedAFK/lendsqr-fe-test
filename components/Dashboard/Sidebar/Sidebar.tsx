@@ -17,6 +17,7 @@ import {
 	FaClipboardList,
 	FaHome
 } from 'react-icons/fa'
+import { MdLogout } from 'react-icons/md'
 import { TbMoneybag } from 'react-icons/tb'
 import { RiBankLine } from 'react-icons/ri'
 import { GrTransaction } from 'react-icons/gr'
@@ -24,6 +25,7 @@ import { BsGearFill } from 'react-icons/bs'
 import { IoIosArrowDown } from 'react-icons/io'
 import Links from './Links/Links'
 import { useStore } from '@/context/store'
+import { useRouter } from 'next/router'
 
 const customersLinks = [
 	{
@@ -139,6 +141,13 @@ const Sidebar = () => {
 		mobileToggle: store.mobileToggle
 	}))
 
+	const router = useRouter()
+
+	const handleSignout = () => {
+		sessionStorage.removeItem('lendsqr-email')
+		router.push('/login')
+	}
+
 	return (
 		<aside
 			className={`${styles.container} ${mobileToggle ? styles.mobileOpen : ''}`}
@@ -166,6 +175,13 @@ const Sidebar = () => {
 				title='Settings'
 				links={settingsLinks}
 			/>
+
+			<section className={styles.logout}>
+				<h5 onClick={handleSignout}>
+					<MdLogout /> Logout
+				</h5>
+				<p>v1.2.0</p>
+			</section>
 		</aside>
 	)
 }

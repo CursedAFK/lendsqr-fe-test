@@ -6,7 +6,7 @@ import { BsBell } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import { IoMdArrowDropdown, IoMdArrowDropup, IoMdClose } from 'react-icons/io'
 import { RxHamburgerMenu } from 'react-icons/rx'
-import { VscSignOut } from 'react-icons/vsc'
+import { MdLogout } from 'react-icons/md'
 import { SlDocs } from 'react-icons/sl'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -110,7 +110,7 @@ const Header = () => {
 									<BsBell /> Alerts
 								</p>
 								<p onClick={handleSignout}>
-									<VscSignOut /> Sign out
+									<MdLogout /> Logout
 								</p>
 							</div>
 						)}

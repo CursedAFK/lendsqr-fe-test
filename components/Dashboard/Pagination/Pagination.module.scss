@@ -3,9 +3,17 @@
 	align-items: center;
 	gap: 0.6vw;
 
+	@media screen and (max-width: 1000px) {
+		gap: 2.4vw;
+	}
+
 	label {
 		font-size: 0.9vw;
 		color: #545f7d;
+
+		@media screen and (max-width: 1000px) {
+			font-size: 3.6vw;
+		}
 	}
 
 	select {
@@ -18,10 +26,20 @@
 		border: none;
 		font-weight: 500;
 
+		@media screen and (max-width: 1000px) {
+			font-size: 3.6vw;
+			border-radius: 1.2vw;
+			padding: 1.6vw 2.4vw;
+		}
+
 		option {
 			font-weight: 500;
 			font-size: 0.95vw;
 			cursor: pointer;
+
+			@media screen and (max-width: 1000px) {
+				font-size: 3.8vw;
+			}
 		}
 	}
 }
@@ -32,12 +50,23 @@
 	align-items: center;
 	gap: 1vw;
 
+	@media screen and (max-width: 1000px) {
+		width: 100%;
+	}
+
 	li {
 		color: #213f7d;
 		opacity: 0.5;
 		font-weight: 500;
 		transition: opacity 0.3s;
 		cursor: pointer;
+
+		@media screen and (max-width: 1000px) {
+			flex: 1;
+			text-align: center;
+			display: grid;
+			place-items: center;
+		}
 
 		&:first-child,
 		&:last-child {
@@ -63,6 +92,11 @@
 			cursor: pointer;
 			padding: 0.3vw;
 			transition: background-color 0.3s;
+
+			@media screen and (max-width: 1000px) {
+				border-radius: 1.2vw;
+				padding: 1.2vw;
+			}
 
 			&:hover {
 				background-color: rgba($color: #213f7d, $alpha: 0.3);
