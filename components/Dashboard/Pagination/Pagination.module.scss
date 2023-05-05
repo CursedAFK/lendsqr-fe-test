@@ -1,5 +1,81 @@
-.subContainer2 {
-	.active {
-		color: red;
+.paginatedForm {
+	display: flex;
+	align-items: center;
+	gap: 0.6vw;
+
+	label {
+		font-size: 0.9vw;
+		color: #545f7d;
+	}
+
+	select {
+		background-color: rgba($color: #213f7d, $alpha: 0.1);
+		font-size: 0.9vw;
+		color: #213f7d;
+		outline: none;
+		border-radius: 0.3vw;
+		padding: 0.4vw 0.6vw;
+		border: none;
+		font-weight: 500;
+
+		option {
+			font-weight: 500;
+			font-size: 0.95vw;
+			cursor: pointer;
+		}
+	}
+}
+
+.paginatedLists {
+	display: flex;
+	list-style: none;
+	align-items: center;
+	gap: 1vw;
+
+	li {
+		color: #213f7d;
+		opacity: 0.5;
+		font-weight: 500;
+		transition: opacity 0.3s;
+		cursor: pointer;
+
+		&:first-child,
+		&:last-child {
+			opacity: 1;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+
+		&.active {
+			opacity: 1;
+		}
+
+		button {
+			display: flex;
+			align-items: center;
+			border: none;
+			outline: none;
+			border-radius: 0.3vw;
+			color: #213f7d;
+			background-color: rgba($color: #213f7d, $alpha: 0.1);
+			cursor: pointer;
+			padding: 0.3vw;
+			transition: background-color 0.3s;
+
+			&:hover {
+				background-color: rgba($color: #213f7d, $alpha: 0.3);
+			}
+
+			&:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+
+				&:hover {
+					background-color: rgba($color: #213f7d, $alpha: 0.1);
+				}
+			}
+		}
 	}
 }

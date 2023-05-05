@@ -17,7 +17,7 @@ const Pagination = ({ pageLists, activePage, changePage }: Props) => {
 
 	return (
 		<>
-			<form>
+			<form className={styles.paginatedForm}>
 				<label>Showing</label>
 				<select
 					value={activePage * 10}
@@ -39,7 +39,7 @@ const Pagination = ({ pageLists, activePage, changePage }: Props) => {
 				<label>out of {pageLists.length * 10}</label>
 			</form>
 
-			<ul className={styles.subContainer2}>
+			<ul className={styles.paginatedLists}>
 				<li>
 					<button
 						disabled={activePage === 1}

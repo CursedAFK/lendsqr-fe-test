@@ -3,6 +3,7 @@ import { IoFilter } from 'react-icons/io5'
 import { HiOutlineDotsVertical, HiOutlineEye } from 'react-icons/hi'
 import { FiUserX, FiUserCheck } from 'react-icons/fi'
 import { Dispatch, SetStateAction, useState } from 'react'
+import styles from './UsersTable.module.scss'
 
 interface Props {
 	users: Users[]
@@ -30,7 +31,7 @@ const OptionTable = ({
 	const [isOptionsOpen, setIsOptionsOpen] = useState(false)
 
 	return (
-		<td>
+		<td className={styles.options}>
 			<HiOutlineDotsVertical onClick={() => setIsOptionsOpen(prev => !prev)} />
 			{isOptionsOpen && (
 				<div onClick={() => setIsOptionsOpen(false)}>
@@ -104,167 +105,186 @@ const UsersTable = ({
 	}
 
 	return (
-		<table>
-			<thead>
-				<tr>
-					{isFilterOpen && (
-						<th>
-							<form onSubmit={handleFilter}>
-								<div>
-									<label htmlFor='organization'>Organization</label>
-									<select
-										name='organization'
-										id='organization'
-										onChange={e =>
-											setFormData({
-												...formData,
-												organization: e.target.value
-											})
-										}
-										value={formData.organization}
-									>
-										<option hidden>Select</option>
-										{uniqueOrgLists.map(user => (
-											<option
-												value={user!.orgName}
-												key={user!.id}
-											>
-												{user!.orgName}
-											</option>
-										))}
-									</select>
-								</div>
-
-								<div>
-									<label htmlFor='username'>Username</label>
-									<input
-										type='text'
-										name='username'
-										id='username'
-										placeholder='User'
-										value={formData.username}
-										onChange={e =>
-											setFormData({ ...formData, username: e.target.value })
-										}
-									/>
-								</div>
-
-								<div>
-									<label htmlFor='email'>Email</label>
-									<input
-										type='email'
-										id='email'
-										placeholder='Email'
-										value={formData.email}
-										onChange={e =>
-											setFormData({ ...formData, email: e.target.value })
-										}
-									/>
-								</div>
-
-								<div>
-									<label htmlFor='date'>Date</label>
-									<input
-										type='date'
-										name='date'
-										id='date'
-										onChange={e =>
-											setFormData({
-												...formData,
-												date: new Date(e.target.value).toLocaleString(
-													'default',
-													{ year: 'numeric', month: 'short', day: 'numeric' }
-												)
-											})
-										}
-									/>
-								</div>
-
-								<div>
-									<label htmlFor='phoneNumber'>Phone Number</label>
-									<input
-										type='text'
-										name='phoneNumber'
-										id='phoneNumber'
-										placeholder='Phone Number'
-										value={formData.phoneNumber}
-										onChange={e =>
-											setFormData({ ...formData, phoneNumber: e.target.value })
-										}
-									/>
-								</div>
-
-								<div>
-									<label htmlFor='status'>Status</label>
-									<select
-										name='status'
-										value={formData.status}
-										onChange={e =>
-											setFormData({ ...formData, status: e.target.value })
-										}
-										id='status'
-									>
-										<option hidden>Select</option>
-										<option value='Active'>Active</option>
-										<option value='Blacklisted'>Blacklisted</option>
-									</select>
-								</div>
-
-								<div>
-									<button
-										type='reset'
-										onClick={() =>
-											setFormData({
-												organization: '',
-												username: '',
-												email: '',
-												date: '',
-												phoneNumber: '',
-												status: ''
-											})
-										}
-									>
-										Reset
-									</button>
-									<button type='submit'>Filter</button>
-								</div>
-							</form>
-						</th>
-					)}
-					{tableHead.map(head => (
-						<th
-							key={head}
-							onClick={() => setIsFilterOpen(prev => !prev)}
-						>
-							{head} <IoFilter />
-						</th>
-					))}
-					<th></th>
-				</tr>
-			</thead>
-
-			<tbody>
-				{users.map(user => (
-					<tr key={user.id}>
-						<td>{user.orgName}</td>
-						<td>{user.userName}</td>
-						<td>{user.email}</td>
-						<td>
-							{user.phoneNumber
-								.split('x')[0]
-								.replace(/-/g, '')
-								.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}
-						</td>
-						<td>{formatDate(user.createdAt)}</td>
-						<td>{user.status}</td>
-						<OptionTable
-							userId={user.id}
-							changeUserStatus={changeUserStatus}
-						/>
+		<>
+			<table className={styles.container}>
+				<thead>
+					<tr>
+						{tableHead.map(head => (
+							<th
+								key={head}
+								onClick={() => setIsFilterOpen(prev => !prev)}
+							>
+								{head} <IoFilter />
+							</th>
+						))}
+						<th></th>
 					</tr>
-				))}
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+					{users.length === 0 ? (
+						<tr>
+							<td colSpan={tableHead.length}>No Users Found</td>
+						</tr>
+					) : (
+						users.map(user => (
+							<tr key={user.id}>
+								<td>{user.orgName}</td>
+								<td>{user.userName}</td>
+								<td>{user.email}</td>
+								<td>
+									{user.phoneNumber
+										.split('x')[0]
+										.replace(/-/g, '')
+										.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}
+								</td>
+								<td>{formatDate(user.createdAt)}</td>
+								<td>
+									<p
+										className={`${user.status === 'Active' && styles.active} ${
+											user.status === 'Blacklisted' && styles.blacklisted
+										} ${user.status === 'Pending' && styles.pending}`}
+									>
+										{user.status}
+									</p>
+								</td>
+								<OptionTable
+									userId={user.id}
+									changeUserStatus={changeUserStatus}
+								/>
+							</tr>
+						))
+					)}
+				</tbody>
+			</table>
+
+			{isFilterOpen && (
+				<form
+					className={styles.formFilter}
+					onSubmit={handleFilter}
+				>
+					<div>
+						<label htmlFor='organization'>Organization</label>
+						<select
+							name='organization'
+							id='organization'
+							onChange={e =>
+								setFormData({
+									...formData,
+									organization: e.target.value
+								})
+							}
+							value={formData.organization}
+						>
+							<option hidden>Select</option>
+							{uniqueOrgLists.map(user => (
+								<option
+									value={user!.orgName}
+									key={user!.id}
+								>
+									{user!.orgName}
+								</option>
+							))}
+						</select>
+					</div>
+
+					<div>
+						<label htmlFor='username'>Username</label>
+						<input
+							type='text'
+							name='username'
+							id='username'
+							placeholder='User'
+							value={formData.username}
+							onChange={e =>
+								setFormData({ ...formData, username: e.target.value })
+							}
+						/>
+					</div>
+
+					<div>
+						<label htmlFor='email'>Email</label>
+						<input
+							type='email'
+							id='email'
+							placeholder='Email'
+							value={formData.email}
+							onChange={e =>
+								setFormData({ ...formData, email: e.target.value })
+							}
+						/>
+					</div>
+
+					<div>
+						<label htmlFor='date'>Date</label>
+						<input
+							type='date'
+							name='date'
+							id='date'
+							onChange={e =>
+								setFormData({
+									...formData,
+									date: new Date(e.target.value).toLocaleString('default', {
+										year: 'numeric',
+										month: 'short',
+										day: 'numeric'
+									})
+								})
+							}
+						/>
+					</div>
+
+					<div>
+						<label htmlFor='phoneNumber'>Phone Number</label>
+						<input
+							type='text'
+							name='phoneNumber'
+							id='phoneNumber'
+							placeholder='Phone Number'
+							value={formData.phoneNumber}
+							onChange={e =>
+								setFormData({ ...formData, phoneNumber: e.target.value })
+							}
+						/>
+					</div>
+
+					<div>
+						<label htmlFor='status'>Status</label>
+						<select
+							name='status'
+							value={formData.status}
+							onChange={e =>
+								setFormData({ ...formData, status: e.target.value })
+							}
+							id='status'
+						>
+							<option hidden>Select</option>
+							<option value='Active'>active</option>
+							<option value='Blacklisted'>blacklisted</option>
+						</select>
+					</div>
+
+					<div>
+						<button
+							type='reset'
+							onClick={() =>
+								setFormData({
+									organization: '',
+									username: '',
+									email: '',
+									date: '',
+									phoneNumber: '',
+									status: ''
+								})
+							}
+						>
+							Reset
+						</button>
+						<button type='submit'>Filter</button>
+					</div>
+				</form>
+			)}
+		</>
 	)
 }
 
