@@ -4,7 +4,7 @@ interface Props {
 	pageTitle: string
 }
 
-const PageHead = ({ pageTitle }: Props) => {
+const PageHead = ({ pageTitle = 'Welcome | Lendsqr' }: Props) => {
 	return (
 		<Head>
 			<title>{pageTitle}</title>
@@ -30,11 +30,11 @@ const PageHead = ({ pageTitle }: Props) => {
 			/>
 			<meta
 				property='og:image'
-				content='https://abdulramon-lasisi-lendsqr-fe-test.vercel.app/images/preview.png'
+				content='https://abdulramon-lasisi-lendsqr-fe-test-bmdiw7xj1-cursedafk.vercel.app/images/preview.png'
 			/>
 			<meta
 				property='og:url'
-				content='https://abdulramon-lasisi-lendsqr-fe-test.vercel.app/'
+				content='https://abdulramon-lasisi-lendsqr-fe-test-bmdiw7xj1-cursedafk.vercel.app'
 			/>
 			<link
 				rel='icon'
