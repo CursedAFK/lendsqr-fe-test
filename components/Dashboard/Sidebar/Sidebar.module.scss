@@ -97,6 +97,11 @@
 
 		h3 {
 			opacity: 1;
+			margin-bottom: 1vw;
+
+			@media screen and (max-width: 1000px) {
+				margin-bottom: 4vw;
+			}
 		}
 	}
 

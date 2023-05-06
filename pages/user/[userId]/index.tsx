@@ -65,6 +65,11 @@ const User: NextPageWithLayout<Props> = ({ user }: Props) => {
 		id: string,
 		status: 'Active' | 'Blacklisted'
 	) => {
+		if (!storeUsersData.length) {
+			alert('Please come in from the dashboard to keep user changes in sync')
+			return
+		}
+
 		const pendingUsers = storeUsersData.map(user =>
 			user.id === id
 				? {
@@ -103,20 +108,22 @@ const User: NextPageWithLayout<Props> = ({ user }: Props) => {
 
 				<div>
 					<h2>User Details</h2>
-					<button
-						onClick={() =>
-							changeUserStatus(componentUserData.id, 'Blacklisted')
-						}
-						disabled={componentUserData.status === 'Blacklisted'}
-					>
-						Blacklist User
-					</button>
-					<button
-						onClick={() => changeUserStatus(componentUserData.id, 'Active')}
-						disabled={componentUserData.status === 'Active'}
-					>
-						Activate User
-					</button>
+					<div>
+						<button
+							onClick={() =>
+								changeUserStatus(componentUserData.id, 'Blacklisted')
+							}
+							disabled={componentUserData.status === 'Blacklisted'}
+						>
+							Blacklist User
+						</button>
+						<button
+							onClick={() => changeUserStatus(componentUserData.id, 'Active')}
+							disabled={componentUserData.status === 'Active'}
+						>
+							Activate User
+						</button>
+					</div>
 				</div>
 			</section>
 
