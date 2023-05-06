@@ -2,7 +2,7 @@ import LendsqrText from '@/components/Icons/LendsqrText'
 import PageHead from '@/components/PageHead/PageHead'
 import Image from 'next/image'
 import styles from '../../styles/login.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 const Login = () => {
@@ -32,6 +32,10 @@ const Login = () => {
 		setIsLoading(false)
 		router.push('/')
 	}
+
+	useEffect(() => {
+		alert('You can login with anything')
+	}, [])
 
 	return (
 		<div className={styles.container}>
