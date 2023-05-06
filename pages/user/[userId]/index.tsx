@@ -347,13 +347,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	)
 	const users: Users[] = await response.json()
 
+	// i had to limit the number of prerendered user to 20, because of the server rate limit
+	// so any user not generated at build time would be fetched at request time and cached
+
 	return {
-		paths: users.map(user => ({
+		paths: users.slice(0, 20).map(user => ({
 			params: {
 				userId: user.id
 			}
 		})),
-		fallback: false
+		fallback: 'blocking'
 	}
 }
 
